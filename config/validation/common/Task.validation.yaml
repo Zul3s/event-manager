@@ -1,0 +1,3 @@
+App\Entity\Task:
+  constraints:
+    - Callback: validate

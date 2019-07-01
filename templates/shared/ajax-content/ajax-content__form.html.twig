@@ -1,0 +1,32 @@
+{% set id = "ajax-content__form_"~random() %}
+<div id="{{ id }}">
+    {% block body %}{% endblock %}
+</div>
+
+<script type="text/javascript">
+    $("#{{ id }} form").on('submit', function (event) {
+        event.preventDefault();
+        let target = $("#{{ id }}");
+        let element = $(this);
+        let url = element.attr('action');
+        $.ajax({
+            url: url,
+            method: "POST",
+            data : element.serialize(),
+            dataType : 'html',
+        })
+            .done(function (result) {
+                if (result === "OK") {
+                    window.location.reload();
+                    return;
+                }
+                if (result.match(/^http/)) {
+                    window.location.replace(result);
+                }
+                target.replaceWith(result);
+            })
+            .fail(function (result) {
+                target.replaceWith(result.responseText);
+            });
+    })
+</script>

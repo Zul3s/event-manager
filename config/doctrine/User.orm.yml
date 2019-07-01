@@ -1,0 +1,36 @@
+App\Entity\User:
+    type: entity
+    table: user
+    repositoryClass: App\Repository\UserRepository
+    uniqueConstraints:
+        UNIQ_8D93D649E7927C74:
+            columns:
+                - email
+    id:
+        id:
+            type: uuid
+            nullable: false
+            id: true
+            generator:
+                strategy: CUSTOM
+            customIdGenerator:
+                class: Ramsey\Uuid\Doctrine\UuidGenerator
+    fields:
+        email:
+            type: string
+            nullable: false
+            length: 180
+            options:
+                fixed: false
+        roles:
+            type: array
+            nullable: false
+            options:
+                fixed: false
+        password:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

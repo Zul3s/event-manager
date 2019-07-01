@@ -1,0 +1,27 @@
+easy_admin:
+  user:
+    name_property_path: 'email'
+
+  design:
+    assets:
+      css:
+        # ...
+        - 'bundles/easyadmin/bootstrap-all.css'
+      js:
+        - 'bundles/easyadmin/bootstrap-all.js'
+
+  entities:
+    Event:
+      class: App\Entity\Event
+      search:
+        fields: ['name', 'date']
+      form:
+        fields:
+          - { property: 'name' }
+          - { property: 'description' }
+          - { property: 'date', type_options: { widget: 'single_text' } }
+    Category:
+      class: App\Entity\Category
+
+    Task:
+      class: App\Entity\Task

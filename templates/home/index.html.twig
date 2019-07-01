@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello !{% endblock %}
+
+{% block body %}
+<section id="home" name="home">
+    <div id="headerwrap">
+        <div class="container">
+            <div class="row centered">
+                <div class="col-lg-12">
+                    <h1>Welcome To <b>Event Manager</b></h1>
+                    <h3>Event manager, full OpenSource on MIT license.</h3>
+                    <br>
+                </div>
+
+                <div class="col-lg-2">
+                    <h5>Rapide</h5>
+                    <p>Entrer en quelques secondes vos tâches pour l'événement.</p>
+                    <img class="hidden-xs hidden-sm hidden-md" src="{{ asset('img/arrow1.png') }}">
+                </div>
+                <div class="col-lg-8">
+                    <img class="img-responsive img-background" src="{{ asset('img/app-bg.png') }}" alt="BG">
+                </div>
+                <div class="col-lg-2">
+                    <br>
+                    <img class="hidden-xs hidden-sm hidden-md" src="{{ asset('img/arrow2.png') }}">
+                    <h5>Design performant</h5>
+                    <p>Simple et intuitif.</p>
+                </div>
+            </div>
+        </div>
+        <!--/ .container -->
+    </div>
+    <!--/ #headerwrap -->
+</section>
+{% endblock %}

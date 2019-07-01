@@ -1,0 +1,41 @@
+<div class="modal" id="modal--ajax-content" role="dialog" aria-labelledby="modal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content"></div>
+    </div>
+</div>
+
+<template id="modal--ajax-content__spinner">
+    <div class="modal-body">
+        {% include 'shared/spinner/_spinner--1.html.twig' %}
+    </div>
+</template>
+
+<script type="text/javascript">
+    const modalAjaxContent = $('#modal--ajax-content');
+    const modalAjaxContentSpinner = $('#modal--ajax-content__spinner').html();
+    let modalAjaxContentBtn = $(document).find('.modal--ajax-content__btn');
+    const modalAjaxContentTarget = modalAjaxContent.find('.modal-content');
+
+    modalAjaxContentBtn.on('click', function (e) {
+        if ($(this).hasClass('disabled')) {
+            return;
+        }
+        e.preventDefault();
+        let $target   = $(this).data('target');
+        if ($target === undefined) {
+            throw 'Target (data-target) is undefined on btn.';
+        }
+        modalAjaxContentTarget.html(modalAjaxContentSpinner);
+        modalAjaxContent.modal('toggle');
+
+        $.get($target,
+            function(data) {
+                modalAjaxContentTarget.html(data);
+            }
+        ).fail(function (data) {
+            modalAjaxContentTarget.html(data);
+        });
+    });
+
+
+</script>

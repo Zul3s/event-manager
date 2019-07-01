@@ -1,0 +1,10 @@
+{% extends 'shared/modal/_modal--ajax-content__form.html.twig' %}
+{% block modal__ajax__body %}
+    <div class="row">
+        <div class="col-xs-12">
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

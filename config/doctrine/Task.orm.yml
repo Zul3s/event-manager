@@ -1,0 +1,31 @@
+App\Entity\Task:
+  type: entity
+  table: task
+  repositoryClass: App\Repository\TaskRepository
+  id:
+    id:
+      type: uuid
+      nullable: false
+      id: true
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: Ramsey\Uuid\Doctrine\UuidGenerator
+  fields:
+    name:
+      type: string
+      nullable: false
+    authorName:
+      type: string
+      nullable: false
+
+  manyToOne:
+    category:
+      targetEntity: App\Entity\Category
+      joinColumn:
+        name: category_id
+        referencedColumnName: id
+        nullable: false
+      inversedBy: tasks
+
+  lifecycleCallbacks: {  }

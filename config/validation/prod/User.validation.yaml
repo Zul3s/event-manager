@@ -1,0 +1,9 @@
+App\Entity\User:
+  properties:
+    password:
+      - Length:
+          min: 8
+          max: 254
+      - Rollerworks\Component\PasswordStrength\Validator\Constraints\PasswordStrength:
+          minLength: 8
+          minStrength: 4

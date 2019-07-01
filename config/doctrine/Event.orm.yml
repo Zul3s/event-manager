@@ -1,0 +1,32 @@
+App\Entity\Event:
+  type: entity
+  table: event
+  repositoryClass: App\Repository\EventRepository
+  id:
+    id:
+      type: uuid
+      nullable: false
+      id: true
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: Ramsey\Uuid\Doctrine\UuidGenerator
+  fields:
+    name:
+      type: string
+      nullable: false
+    description:
+      type: text
+      nullable: true
+    date:
+      type: datetime
+      nullable: true
+
+
+  oneToMany:
+    categories:
+      targetEntity: App\Entity\Category
+      mappedBy: event
+      orphanRemoval: true
+
+  lifecycleCallbacks: {  }

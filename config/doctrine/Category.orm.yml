@@ -1,0 +1,37 @@
+App\Entity\Category:
+  type: entity
+  table: category
+  repositoryClass: App\Repository\CategoryRepository
+  id:
+    id:
+      type: uuid
+      nullable: false
+      id: true
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: Ramsey\Uuid\Doctrine\UuidGenerator
+  fields:
+    name:
+      type: string
+      nullable: false
+    maxTasks:
+      type: integer
+      nullable: true
+
+  manyToOne:
+    event:
+      targetEntity: App\Entity\Event
+      joinColumn:
+        name: event_id
+        referencedColumnName: id
+        nullable: false
+      inversedBy: categories
+
+  oneToMany:
+    tasks:
+      targetEntity: App\Entity\Task
+      mappedBy: category
+      orphanRemoval: true
+
+  lifecycleCallbacks: {  }

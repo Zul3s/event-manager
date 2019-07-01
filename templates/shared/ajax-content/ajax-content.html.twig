@@ -1,0 +1,24 @@
+<script type="text/javascript">
+    let ajaxContentBtn = $(document).find('.ajax-content__btn');
+
+    ajaxContentBtn.on('click', function (e) {
+        e.preventDefault();
+        loadActionToTarget(this);
+    });
+
+    function loadActionToTarget(element) {
+        let ajaxContentTarget = $($(element).data('target'));
+        let $action = $(element).data('action');
+        if ($action === undefined) {
+            throw 'Target (data-target) is undefined on btn.';
+        }
+
+        $.get($action,
+            function (data) {
+                ajaxContentTarget.html(data);
+            }
+        ).fail(function (data) {
+            ajaxContentTarget.html(data);
+        });
+    }
+</script>

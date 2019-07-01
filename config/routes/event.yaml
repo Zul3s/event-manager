@@ -1,0 +1,13 @@
+event:
+  path: /events/{id}
+  controller: App\Controller\EventController::display
+
+event_add_task:
+  path: /events/{id}/categories/{category}/tasks
+  controller: App\Controller\EventController::addTask
+  methods: [GET, POST]
+
+event_edit_task:
+  path: /events/{id}/categories/{category}/tasks/{task}
+  controller: App\Controller\EventController::editTask
+  methods: [GET, PUT]

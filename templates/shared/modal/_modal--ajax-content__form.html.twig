@@ -1,0 +1,72 @@
+<!--
+    This composant need a spinner composant in the spinner_charging block to correctly work.
+    By default, the spinner composant who is used is here : Resources/views/shared/component/spinner
+-->
+{% set id = 'modal--ajax-content_'~ (random()) %}
+{% set _modal__ajax__header = block('modal__ajax__header') %}
+{% set _modal__ajax__footer = block('modal__ajax__footer') %}
+
+<div class="modal--ajax-content__form__container" id="{{ id }}">
+    {% if _modal__ajax__header is not empty %}
+        <div class="modal-header">
+            {% block modal__ajax__header %}
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            {% endblock %}
+        </div>
+    {% endif %}
+    <div class="modal-body">
+        {% block modal__ajax__body %}
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        {% endblock %}
+    </div>
+    <template id="modal--ajax-content__spinner">
+        {% block spinner_charging %}
+            {% include 'shared/spinner/_spinner--1.html.twig' %}
+        {% endblock %}
+    </template>
+    {% if _modal__ajax__footer is not empty %}
+        <div class="modal-footer">
+            {% block modal__ajax__footer %}{% endblock %}
+        </div>
+    {% endif %}
+</div>
+
+<script type="text/javascript">
+    $(document).find('#{{ id }}').find('form').on('submit', function (e) {
+        e.preventDefault();
+        let $target = $(this).attr('action');
+        let $data = new FormData($(this)[0]);
+        let $container = $($(this).parents('.modal--ajax-content__form__container'));
+
+        let modalAjaxContentSpinner = $('#modal--ajax-content__spinner').html();
+        $(this).html(modalAjaxContentSpinner);
+
+        $.ajax({
+            url: $target,
+            method: "POST",
+            data : $data,
+            dataType : 'html',
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                if (result === "OK") {
+                    return location.reload();
+                } else if (result.match(/^http/)) {
+                    window.location.replace(result);
+                } else {
+                    $container.replaceWith(result);
+                }
+            },
+            error: function (result) {
+                $container.replaceWith(result);
+            },
+        });
+    });
+
+    $('#{{ id }}').find('.alert').tab('show');
+</script>

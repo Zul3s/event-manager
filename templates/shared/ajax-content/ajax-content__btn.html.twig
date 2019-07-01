@@ -1,0 +1,17 @@
+{#
+    Params:
+    {
+        'label'             : string,
+        'target'            : string,
+        'additionalClass'   : ?string,
+        'id'                : ?string
+    }
+#}
+{% set additionalClass = additionalClass|default(null) %}
+{% set id = id|default('') %}
+
+<button class="btn {{ additionalClass }} ajax-content__btn"
+        data-target="{{ target }}"
+        id="{{ id }}">
+    {{ label }}
+</button>
