@@ -36,9 +36,15 @@ class Category
      */
     private $tasks;
 
+    /**
+     * @var bool
+     */
+    private $public;
+
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
+        $this->public = true;
     }
 
     public function __toString()
@@ -138,6 +144,24 @@ class Category
             return $this;
         }
         $this->tasks->removeElement($task);
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublic(): bool
+    {
+        return $this->public;
+    }
+
+    /**
+     * @param bool $public
+     * @return Category
+     */
+    public function setPublic(bool $public)
+    {
+        $this->public = $public;
         return $this;
     }
 }

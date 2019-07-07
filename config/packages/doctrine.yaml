@@ -20,3 +20,11 @@ doctrine:
         dir: '%kernel.project_dir%/config/doctrine'
         prefix: 'App\Entity'
         alias: App
+
+    filters:
+      task_public:
+        class: App\Filter\TaskFilter
+        enabled: true
+      category_public:
+        class: App\Filter\CategoryFilter
+        enabled: true

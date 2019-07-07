@@ -18,6 +18,9 @@ App\Entity\Task:
     authorName:
       type: string
       nullable: false
+    public:
+      type: boolean
+      nullable: false
 
   manyToOne:
     category:

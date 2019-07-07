@@ -18,6 +18,9 @@ App\Entity\Category:
     maxTasks:
       type: integer
       nullable: true
+    public:
+      type: boolean
+      nullable: false
 
   manyToOne:
     event:

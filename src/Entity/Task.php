@@ -31,6 +31,17 @@ class Task
      */
     private $category;
 
+    /**
+     * @var bool
+     */
+    private $public;
+
+    public function __construct()
+    {
+        $this->public = true;
+        $this->display = true;
+    }
+
     public function __toString()
     {
         return $this->getName();
@@ -93,6 +104,24 @@ class Task
     {
         $this->category = $category;
         $category->addTask($this);
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublic()
+    {
+        return $this->public;
+    }
+
+    /**
+     * @param bool $public
+     * @return Task
+     */
+    public function setPublic(bool $public)
+    {
+        $this->public = $public;
         return $this;
     }
 
