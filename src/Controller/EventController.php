@@ -23,9 +23,9 @@ class EventController extends AbstractController
     public function display(Event $event, SessionInterface $session): Response
     {
         $session->set('event_id', $event->getId());
-        return $this->render('event/index.html.twig', array_merge(array(
+        return $this->render('event/index.html.twig', array(
             'event' => $event,
-        )));
+        ));
     }
 
     /**
